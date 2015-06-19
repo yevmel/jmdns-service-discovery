@@ -103,12 +103,12 @@ public class JMDNSServiceDiscovery {
 
                 @Override
                 public void serviceRemoved(ServiceEvent event) {
-                    System.out.println("removed: " + event.getName() + "(" + event.getType() + ")");
+                    // ...
                 }
 
                 @Override
                 public void serviceAdded(ServiceEvent event) {
-                    System.out.println("added: " + event.getName() + "(" + event.getType() + ")");
+                    // ...
                 }
             });
         }
