@@ -8,6 +8,9 @@ JMDNSServicePromoter servicePromoter = new JMDNSServicePromoter();
 
 // promote service named "test" with description "test-service" listening on port 6001
 servicePromoter.promote(type, "test", "test-service", 6001);
+
+// ...
+servicePromoter.shutdown();
 ```
 
 ## listen for services
