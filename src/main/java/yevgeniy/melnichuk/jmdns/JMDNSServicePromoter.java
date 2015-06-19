@@ -3,6 +3,7 @@ package yevgeniy.melnichuk.jmdns;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -37,6 +38,10 @@ public class JMDNSServicePromoter {
             jmdns.close();
         }
 
+    }
+
+    public JMDNSServicePromoter promote(final String type, final String name, final String description, final int port) {
+        return promote(type, name, description, port, Collections.emptyMap());
     }
 
     public JMDNSServicePromoter promote(final String type, final String name, final String description, final int port, final Map<String, String> props) {
