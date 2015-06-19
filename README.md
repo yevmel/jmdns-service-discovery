@@ -2,7 +2,7 @@
 makes using [jmdns](https://github.com/openhab/jmdns) more convenient.
 
 ## register services
-```
+```java
 String type = new ServiceTypeBuilder().withHttp().getType();
 JMDNSServicePromoter servicePromoter = new JMDNSServicePromoter();
 
@@ -11,7 +11,7 @@ servicePromoter.promote(type, "test", "test-service", 6001);
 ```
 
 ## listen for services
-```
+```java
 String type = new ServiceTypeBuilder().withHttp().getType();
 
 JMDNSServiceDiscovery serviceDiscovery = new JMDNSServiceDiscovery();
