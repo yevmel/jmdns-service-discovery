@@ -46,6 +46,19 @@ public class JMDNSServiceDiscovery {
 
             @Override
             public void serviceAvailable(Service info) {
+                if (queryMatches(query, info)) {
+                    callback.serviceAvailable(info);
+                }
+            }
+
+            @Override
+            public void serviceDisappeared(Service info) {
+                if (queryMatches(query, info)) {
+                    callback.serviceDisappeared(info);
+                }
+            }
+
+            private boolean queryMatches(final Map<String, String> query, final Service info) {
                 Map<String, String> properties = info.getProperties();
                 for (Map.Entry<String, String> entry : query.entrySet()) {
                     String valueFromQuery = entry.getValue();
@@ -58,11 +71,11 @@ public class JMDNSServiceDiscovery {
 
                     String valueFromService = properties.get(key);
                     if (!valueFromQuery.equals(valueFromService)) {
-                        return;
+                        return false;
                     }
                 }
 
-                callback.serviceAvailable(info);
+                return true;
             }
         });
     }
@@ -103,7 +116,13 @@ public class JMDNSServiceDiscovery {
 
                 @Override
                 public void serviceRemoved(ServiceEvent event) {
-                    // ...
+                    String subtype = event.getInfo().getSubtype();
+                    String type = event.getType();
+                    String name = event.getName();
+                    Map<String, String> props = getPropertiesFromServiceInfo(event.getInfo());
+
+                    Service info = new Service().withType(type).withName(name).withProperties(props).withSubtype(subtype);
+                    callback.serviceDisappeared(info);
                 }
 
                 @Override
@@ -162,5 +181,7 @@ public class JMDNSServiceDiscovery {
 
     public static interface ServiceCallback {
         void serviceAvailable(Service info);
+
+        void serviceDisappeared(Service info);
     }
 }

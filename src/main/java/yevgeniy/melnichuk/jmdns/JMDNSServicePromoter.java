@@ -41,7 +41,8 @@ public class JMDNSServicePromoter {
     }
 
     public JMDNSServicePromoter promote(final String type, final String name, final String description, final int port) {
-        return promote(type, name, description, port, Collections.emptyMap());
+        Map<String, String> props = Collections.emptyMap();
+        return promote(type, name, description, port, props);
     }
 
     public JMDNSServicePromoter promote(final String type, final String name, final String description, final int port, final Map<String, String> props) {
