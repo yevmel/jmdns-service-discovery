@@ -12,6 +12,10 @@ public class ClientMain {
             public void serviceAvailable(Service info) {
                 System.out.println("service available: " + info.getName() + "(" + info.getSubtype() + "." + info.getType() + ")");
             }
+
+            @Override
+            public void serviceDisappeared(Service info) {
+            }
         });
         Thread.sleep(30_000);
 
